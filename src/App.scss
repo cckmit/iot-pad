@@ -1,0 +1,23 @@
+.app {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: #000;
+    overflow: hidden;
+    background-image: url(./assets/img/bg.jpg);
+    background-position: center;
+    background-size: cover;
+
+    &::before{
+        content:'';
+        display: block;
+        position: absolute;
+        left:0;
+        top:0;
+        bottom:0;
+        right:0;
+        background: rgba(0,0,0,.6);
+    }
+}

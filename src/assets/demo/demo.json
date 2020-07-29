@@ -1,0 +1,72 @@
+{
+    "isSuccess": true,
+    "msg": "操作成功",
+    "data": {
+        "rows": {
+            "ProjectList": null,
+            "RegionList": [
+                {
+                    "Id": "6d4a2a9e-210c-4e51-b1bb-701882dba8f1",
+                    "LocationCode": "220000,220100,220172,220172002",
+                    "LocationName": "吉林省,长春市,长春净月高新技术产业开发区,净月街道",
+                    "EnabledMark": null,
+                    "DeleteMark": null,
+                    "CreateTime": null,
+                    "CreateUserId": null,
+                    "CreaterUserName": null,
+                    "ModifyTime": null,
+                    "ModifyUserId": null,
+                    "ModifyUserName": null,
+                    "Remark": null,
+                    "X": "43.793912",
+                    "Y": "125.385508",
+                    "IsSelect": false
+                },
+                {
+                    "Id": "0d48398f-357c-46a5-b75e-876d71be3aa5",
+                    "LocationCode": "230000,230100,230109,230109005",
+                    "LocationName": "黑龙江省,哈尔滨市,松北区,松北街道",
+                    "EnabledMark": null,
+                    "DeleteMark": null,
+                    "CreateTime": null,
+                    "CreateUserId": null,
+                    "CreaterUserName": null,
+                    "ModifyTime": null,
+                    "ModifyUserId": null,
+                    "ModifyUserName": null,
+                    "Remark": null,
+                    "X": "45.803732",
+                    "Y": "126.514765",
+                    "IsSelect": false
+                }
+            ],
+            "CodeList": null,
+            "StartTime": null,
+            "EndTime": null,
+            "Id": "00000000-0000-0000-0000-000000000000",
+            "Name": "管理员",
+            "Account": null,
+            "HeadIcon": null,
+            "ContactTel": null,
+            "LocationCode": null,
+            "LocationName": null,
+            "X": null,
+            "Y": null,
+            "Description": null,
+            "EnabledMark": null,
+            "DeleteMark": null,
+            "SortCode": null,
+            "CreateTime": null,
+            "CreateUserId": null,
+            "CreaterUserName": null,
+            "ModifyTime": null,
+            "ModifyUserId": null,
+            "ModifyUserName": null,
+            "LocationLevel": 0,
+            "ZoomLevel": 0,
+            "IsSelect": false
+        }
+    },
+    "status": 200,
+    "bl": true
+}
