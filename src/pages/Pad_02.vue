@@ -8,7 +8,7 @@
         </div>
         <div class="msg">{{changeType}}</div>
       </div>
-      <a class="fixed-btn" slot="header">切换</a>
+      <a class="fixed-btn" slot="header" @click="changeMode">切换</a>
     </ColumnItem>
   </div>
 </template>
@@ -52,14 +52,19 @@ export default {
         )},${color.toAlpha(0.95)} 25.68%,${color})`,
       };
     },
+
+    //切换预警机制
+    changeMode() {
+      this.$modal({
+        placement: "center",
+        width: "4rem",
+        height: "5rem",
+        component: "Pad_02_1",
+      });
+    },
   },
 
-  mounted() {
-    this.$modal({
-      placement: "center",
-      component: () => import("@/pages/Pad_02_1.vue"),
-    });
-  },
+  mounted() {},
 };
 </script>
 

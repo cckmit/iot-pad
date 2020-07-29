@@ -161,8 +161,9 @@ $liner-bg: linear-gradient(to top, rgba(#122f69, 0.8) 0%, rgba(#0a0e1b, 0.8) 30%
         .el-dialog {
             border-radius: 0.08rem;
             background: rgba(16, 23, 33, 0.9);
-            box-shadow: $shadow;
+            // box-shadow: $shadow;
             position: absolute;
+            border: 0.01rem solid rgb(81, 142, 230);
 
             &.modal--top-right {
                 position: absolute;
