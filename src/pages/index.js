@@ -1,6 +1,6 @@
 import Vue from 'vue';
 
-const requireComponents = require.context('./', true, /\.vue/);
+const requireComponents = require.context('./', true, /Pad.+\.vue/);
 
 // 遍历出每个组件的路径
 requireComponents.keys().forEach(fileName => {

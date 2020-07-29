@@ -13,6 +13,7 @@
       <span class="column-item--supertitle" v-else>
         <span>{{title}}</span>
       </span>
+      <slot name="header" />
     </div>
     <div class="column-item--body" :style="bodyStyle">
       <slot />
@@ -36,17 +37,17 @@ export default {
     splitOnBody: Boolean,
     splitLine: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
 
   computed: {
     style() {
       return {
-        flex: this.width
+        flex: this.width,
         // width: this.width
       };
-    }
-  }
+    },
+  },
 };
 </script>

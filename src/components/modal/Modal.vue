@@ -14,7 +14,7 @@
       @close="onClose(modal)"
       @closed="onClosed(modal)"
     >
-      <template #title>
+      <!-- <template #title>
         <svg
           class="svg-title"
           xmlns="http://www.w3.org/2000/svg"
@@ -34,7 +34,7 @@
             />
           </g>
         </svg>
-      </template>
+      </template> -->
 
       <component
         :ref="'modalComponent_'+modal.id"

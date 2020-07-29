@@ -2,9 +2,23 @@
   <div class="app">
     <Modal />
 
+    <Headerbar></Headerbar>
+
     <!-- 面板层 -->
-    <Layer :index="2" v-if="show">
-      <Headerbar></Headerbar>
+    <Layer :index="2" class="panel-layer">
+      <div class="flex-container" style="height:45%">
+        <Panel :flex="2.2">
+          <Pad_01 />
+        </Panel>
+        <Panel :flex="2">
+          <Pad_02 />
+        </Panel>
+        <Panel :flex="4">场所信息</Panel>
+      </div>
+      <div class="flex-container" style="height:55%;">
+        <Panel :flex="3.5">场所信息</Panel>
+        <Panel :flex="6.5">场所信息</Panel>
+      </div>
     </Layer>
 
     <!-- 调试层 -->
@@ -28,7 +42,7 @@
         size="mini"
         @click="debug=!debug"
       >Debug</el-button>
-    </Layer> -->
+    </Layer>-->
   </div>
 </template>
 
@@ -39,10 +53,12 @@ import Modal from "@/components/modal";
 Vue.use(Modal);
 import SvgIcon from "@/components/SvgIcon";
 Vue.use(SvgIcon);
-import ColumnItem from "@/components/ColumnItem";
-Vue.component(ColumnItem.name, ColumnItem);
 import Percentbar from "@/components/Percentbar";
 Vue.component(Percentbar.name, Percentbar);
+import Panel from "@/components/Panel.vue";
+Vue.component(Panel.name || "Panel", Panel);
+import ColumnItem from "@/components/ColumnItem.vue";
+Vue.component(ColumnItem.name || "ColumnItem", ColumnItem);
 
 import Layer from "@/components/Layer.vue";
 import Headerbar from "@/components/Headerbar.vue";
@@ -53,14 +69,14 @@ export default {
   components: {
     Layer,
     Modal,
-    Headerbar
+    Headerbar,
   },
 
   data() {
     return {
       debug: false,
 
-      show: false
+      show: false,
     };
   },
 
@@ -68,12 +84,12 @@ export default {
     ...mapState({
       // modal_list: state => state.modal.modal_list,
       // CurrentRegions: state => state.CurrentRegions,
-      CurrentDiskMenu: state => state.CurrentDiskMenu,
-      CurrentDiskSubMenu: state => state.CurrentDiskSubMenu,
+      CurrentDiskMenu: (state) => state.CurrentDiskMenu,
+      CurrentDiskSubMenu: (state) => state.CurrentDiskSubMenu,
       // HtmlFontSize: state => state.HtmlFontSize,
-      FooterBoxVisible: state => state.FooterBoxVisible,
+      FooterBoxVisible: (state) => state.FooterBoxVisible,
       // CurrentOverlayType: state => state.CurrentOverlayType
-    })
+    }),
   },
 
   methods: {},
@@ -102,7 +118,7 @@ export default {
     setTimeout(() => {
       this.show = true;
     }, 100);
-  }
+  },
 };
 </script>
 
