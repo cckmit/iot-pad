@@ -50,7 +50,7 @@ export default {
       const color = this.modeMap[mode].color;
       return {
         backgroundImage: `linear-gradient(to bottom,${color
-          .whiten(0.8)
+          .whiten(0.4)
           .rgb()
           .string()},${color} 25.68%,${color})`,
       };

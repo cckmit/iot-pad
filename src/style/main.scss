@@ -16,10 +16,11 @@ $liner-bg: linear-gradient(to top, rgba(#122f69, 0.8) 0%, rgba(#0a0e1b, 0.8) 30%
     display: flex;
     height: 100%;
     position: relative;
-    // padding: 0.05rem .2rem;
+    padding: 0 .15rem;
 }
 
 .btn {
+    display: inline-block;
     padding: 0.06rem 0.2rem;
     border-radius: 0.02rem;
     background-color: rgb(76, 76, 76);
@@ -28,13 +29,21 @@ $liner-bg: linear-gradient(to top, rgba(#122f69, 0.8) 0%, rgba(#0a0e1b, 0.8) 30%
     box-shadow: 0 0 0.06rem 0.03rem rgba(0, 0, 0, 0.1);
     transition: opacity 0.1s ease;
 
+    &.btn-sm {
+        font-size: 0.12rem;
+        padding: 0 0.08rem;
+    }
+
     & + .btn {
         margin-left: 0.1rem;
     }
 
     &.btn-primary {
-        background-color: none;
-        background-image: linear-gradient(to bottom, rgb(73, 143, 220), rgb(79, 159, 227));
+        background-color: rgb(37,111,192);
+    }
+
+    &.btn-info {
+        background-color: rgb(47, 159, 193);
     }
 
     &:active {

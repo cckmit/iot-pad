@@ -99,7 +99,7 @@
 
 .el-table td,
 .el-table th {
-    padding: 0.04rem 0.04rem;
+    padding: 0.04rem 0.02rem;
 }
 
 .el-table .cell,
@@ -118,7 +118,7 @@
     background: transparent;
     color: rgb(91, 118, 127);
     border: 0.01rem solid rgb(29, 79, 104);
-    padding: 0.07rem 0.08rem;
+    padding: 0.04rem 0.08rem;
     font-size: 0.12rem;
 }
 .el-radio-button:first-child .el-radio-button__inner {
@@ -239,6 +239,17 @@
         &:active {
             border-color: rgb(60, 69, 76);
         }
+    }
+}
+
+.el-textarea {
+    .el-textarea__inner {
+        background: rgb(14, 19, 25);
+        border-width: 0.01rem;
+        border-color: rgb(60, 69, 76);
+        border-radius: 0.06rem;
+        color: rgba(166, 221, 255, 0.7);
+        font-family: "微软雅黑", Arial, Helvetica, sans-serif;
     }
 }
 
@@ -395,6 +406,7 @@
             width: 0.14rem;
             height: 0.14rem;
             border-width: 0.01rem;
+            transition: none;
 
             &:after {
                 width: 0.04rem;
@@ -414,4 +426,12 @@
         font-size: 0.14rem;
         padding-left: 0.1rem;
     }
+}
+
+.el-form-item__label {
+    color: rgb(174, 215, 255);
+    font-size: 0.14rem;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    padding: 0 0.12rem 0 0;
 }

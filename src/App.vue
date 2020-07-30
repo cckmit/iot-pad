@@ -13,7 +13,9 @@
         <Panel :flex="2">
           <Pad_02 />
         </Panel>
-        <Panel :flex="4">场所信息</Panel>
+        <Panel :flex="4">
+          <Pad_03 />
+        </Panel>
       </div>
       <div class="flex-container" style="height:55%;">
         <Panel :flex="3.5">场所信息</Panel>

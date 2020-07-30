@@ -124,7 +124,7 @@ export default {
 
     border-radius: 0.07rem;
     border: 0.02rem solid;
-    margin-bottom: 0.24rem;
+    margin-bottom: 0.2rem;
     text-align: center;
     font-size: 0.16rem;
     transition: background 0.15s ease;
