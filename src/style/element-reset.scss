@@ -366,7 +366,7 @@
 }
 
 .el-tooltip__popper.is-dark {
-    $color:rgb(37,111,192);
+    $color: rgb(37, 111, 192);
     font-size: 0.12rem;
     border-radius: 0.04rem;
     padding: 0.1rem;
@@ -375,7 +375,7 @@
     .popper__arrow {
         border-bottom-color: $color !important;
         top: -0.06rem;
-        border-width: .06rem;
+        border-width: 0.06rem;
     }
     .popper__arrow::after {
         border-bottom-color: $color !important;
@@ -383,5 +383,35 @@
 
     &[x-placement^="bottom"] {
         margin-top: 0.12rem;
+    }
+}
+
+.el-radio {
+    margin-right: 0.3rem;
+    font-size: 0.14rem;
+
+    .el-radio__input {
+        .el-radio__inner {
+            width: 0.14rem;
+            height: 0.14rem;
+            border-width: 0.01rem;
+
+            &:after {
+                width: 0.04rem;
+                height: 0.04rem;
+            }
+        }
+
+        // &.is-checked {
+        //     .el-radio__inner {
+        //         &:after {
+        //             transform: none;
+        //         }
+        //     }
+        // }
+    }
+    .el-radio__label {
+        font-size: 0.14rem;
+        padding-left: 0.1rem;
     }
 }

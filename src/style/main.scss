@@ -3,7 +3,7 @@
 
 $primary: rgb(166, 221, 255);
 $header-height: 5.3vh;
-$shadow: 0 0 0.14rem 0.06rem rgba(22, 129, 179, 0.55);
+$shadow: 0 0 0.1rem 0.04rem rgba(22, 129, 179, 0.55);
 $panel-gutter: 0.15rem;
 $liner-bg: linear-gradient(to top, rgba(#122f69, 0.8) 0%, rgba(#0a0e1b, 0.8) 30%, rgba(#0a0e1b, 0.8) 100%);
 
@@ -17,6 +17,29 @@ $liner-bg: linear-gradient(to top, rgba(#122f69, 0.8) 0%, rgba(#0a0e1b, 0.8) 30%
     height: 100%;
     position: relative;
     // padding: 0.05rem .2rem;
+}
+
+.btn {
+    padding: 0.06rem 0.2rem;
+    border-radius: 0.02rem;
+    background-color: rgb(76, 76, 76);
+    color: #fff;
+    font-size: 0.14rem;
+    box-shadow: 0 0 0.06rem 0.03rem rgba(0, 0, 0, 0.1);
+    transition: opacity 0.1s ease;
+
+    & + .btn {
+        margin-left: 0.1rem;
+    }
+
+    &.btn-primary {
+        background-color: none;
+        background-image: linear-gradient(to bottom, rgb(73, 143, 220), rgb(79, 159, 227));
+    }
+
+    &:active {
+        opacity: 0.9;
+    }
 }
 
 //图层类
@@ -160,8 +183,8 @@ $liner-bg: linear-gradient(to top, rgba(#122f69, 0.8) 0%, rgba(#0a0e1b, 0.8) 30%
         bottom: unset;
         .el-dialog {
             border-radius: 0.08rem;
-            background: rgba(16, 23, 33, 0.9);
-            // box-shadow: $shadow;
+            background-image: linear-gradient(to bottom, rgba(15, 24, 40, 0.9), rgba(13, 33, 78, 0.9));
+            box-shadow: $shadow;
             position: absolute;
             border: 0.01rem solid rgb(81, 142, 230);
 
@@ -222,7 +245,7 @@ $liner-bg: linear-gradient(to top, rgba(#122f69, 0.8) 0%, rgba(#0a0e1b, 0.8) 30%
             .el-dialog__body {
                 padding: 0.1rem 0.24rem 0.24rem 0.24rem;
                 // transition: height ease 0.2s;
-                height: calc(100vh - 7vh - 2.3rem);
+                // height: calc(100vh - 7vh - 2.3rem);
                 overflow-y: auto;
             }
         }
@@ -534,7 +557,7 @@ $liner-bg: linear-gradient(to top, rgba(#122f69, 0.8) 0%, rgba(#0a0e1b, 0.8) 30%
     .column-item--body {
         flex: 1;
         height: calc(100% - 0.3rem);
-        padding-top:.1rem;
+        padding-top: 0.1rem;
         position: relative;
         overflow-y: auto;
     }

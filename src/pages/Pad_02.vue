@@ -14,23 +14,25 @@
 </template>
 
 <script>
+import Color from "color";
+
 export default {
   data() {
     return {
       modeMap: {
         1: {
           name: "上班模式",
-          color: "rgba(48,104,204)",
+          color: new Color("rgb(48,104,204)"),
           time: "06:00-08:00",
         },
         2: {
           name: "下班模式",
-          color: "rgba(112,110,214)",
+          color: new Color("rgb(112,110,214)"),
           time: "06:00-08:00",
         },
         3: {
           name: "休息模式",
-          color: "rgba(60,160,110)",
+          color: new Color("rgb(60,160,110)"),
           time: "06:00-08:00",
         },
       },
@@ -47,19 +49,30 @@ export default {
     getBallStyle(mode = 1) {
       const color = this.modeMap[mode].color;
       return {
-        backgroundImage: `linear-gradient(to bottom,${color.toAlpha(
-          0.85
-        )},${color.toAlpha(0.95)} 25.68%,${color})`,
+        backgroundImage: `linear-gradient(to bottom,${color
+          .whiten(0.8)
+          .rgb()
+          .string()},${color} 25.68%,${color})`,
       };
     },
 
     //切换预警机制
     changeMode() {
+      const _this = this;
       this.$modal({
+        id: "Pad_02_1",
         placement: "center",
-        width: "4rem",
-        height: "5rem",
+        width: "3.6rem",
+        height: "3.5rem",
         component: "Pad_02_1",
+        actions: {
+          cancel() {
+            _this.$modal.close("Pad_02_1");
+          },
+          confirm() {
+            _this.$modal.close("Pad_02_1");
+          },
+        },
       });
     },
   },
@@ -85,7 +98,7 @@ export default {
   width: 1.3rem;
   height: 1.3rem;
   border-radius: 50%;
-  background-color: #fff;
+  // background-color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;

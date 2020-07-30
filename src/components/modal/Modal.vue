@@ -1,8 +1,7 @@
 <template>
   <div class="modals" :class="FooterBoxVisible?'':'lg'">
     <el-dialog
-      :style="{color:'red'}"
-      top="7vh"
+      :top="getTop(modal)"
       :custom-class="'modal--'+modal.placement"
       v-for="modal in modal_list"
       :key="modal.id"
@@ -34,9 +33,10 @@
             />
           </g>
         </svg>
-      </template> -->
+      </template>-->
 
       <component
+        :style="{height:modal.height}"
         :ref="'modalComponent_'+modal.id"
         :is="modal.component"
         v-bind="modal.data"
@@ -64,16 +64,16 @@ export default {
     return {
       globalDialog: {
         title: "Global Dialog",
-        visible: false
-      }
+        visible: false,
+      },
     };
   },
 
   computed: {
     ...mapState({
-      modal_list: state => state.modal.modal_list,
-      FooterBoxVisible: state => state.FooterBoxVisible
-    })
+      modal_list: (state) => state.modal.modal_list,
+      FooterBoxVisible: (state) => state.FooterBoxVisible,
+    }),
   },
 
   methods: {
@@ -90,6 +90,11 @@ export default {
       }
     },
 
+    getTop(modal) {
+      const { height } = modal;
+      return `calc((100vh - ${height})/2)`;
+    },
+
     onClose(modal) {
       this.$store.dispatch("modal/close", modal.id);
     },
@@ -100,7 +105,7 @@ export default {
 
     getBeforeClose(modal) {
       const _this = this;
-      return function(done) {
+      return function (done) {
         if (!modal.beforeClose) {
           done();
         } else {
@@ -122,10 +127,10 @@ export default {
       const ctx = this.$refs[`modalComponent_${modal.id}`][0];
 
       ctx && ctx[method] && ctx[method].call(null, callback);
-    }
+    },
   },
 
-  created() {}
+  created() {},
 };
 </script>
 
