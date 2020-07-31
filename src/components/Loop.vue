@@ -8,7 +8,7 @@
       <SvgIcon icon-class="arrow-down" />
       <span class="point"></span>
     </div>
-    <div class="loop-icons" v-if="!control">
+    <div class="loop-icons">
       <SvgIcon v-for="(i,index) in icons" :key="index" :icon-class="IconMap[i]" />
     </div>
   </div>

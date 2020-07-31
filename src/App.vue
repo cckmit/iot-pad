@@ -8,45 +8,24 @@
     <Layer :index="2" class="panel-layer">
       <div class="flex-container" style="height:45%">
         <Panel :flex="2.2">
-          <Pad_01 />
+          <Pad_01 ref="page_1" />
         </Panel>
         <Panel :flex="2">
-          <Pad_02 />
+          <Pad_02 ref="page_2" />
         </Panel>
         <Panel :flex="4">
-          <Pad_03 />
+          <Pad_03 ref="page_3" />
         </Panel>
       </div>
       <div class="flex-container" style="height:55%;">
         <Panel :flex="3.5">
-          <Pad_04 />
+          <Pad_04 ref="page_4" />
         </Panel>
-        <Panel :flex="6.5">场所信息</Panel>
+        <Panel :flex="6.5">
+          <Pad_05 ref="page_5" />
+        </Panel>
       </div>
     </Layer>
-
-    <!-- 调试层 -->
-    <!-- <Layer :index="99">
-      <div class="debug" v-show="debug" style="z-index:9999">
-        <pre>当前地图覆盖物显示模式:{{CurrentOverlayType}}</pre>
-        <pre>modal_list:{{modal_list}}</pre>
-        <pre>CurrentRegions:{{CurrentRegions}}</pre>
-        <pre>CurrentDiskMenu:{{CurrentDiskMenu}}</pre>
-        <pre>CurrentDiskSubMenu:{{CurrentDiskSubMenu}}</pre>
-        <pre>HtmlFontSize:{{HtmlFontSize}}</pre>
-        <pre>FooterBoxVisible:{{FooterBoxVisible}}<el-button
-  size="mini"
-  @click="$store.commit('set_FooterBoxVisible',true)"
->setTrue</el-button></pre>
-      </div>
-      <el-button
-        class="debug-btn"
-        style="z-index:9999"
-        type="primary"
-        size="mini"
-        @click="debug=!debug"
-      >Debug</el-button>
-    </Layer>-->
   </div>
 </template>
 
@@ -81,46 +60,38 @@ export default {
       debug: false,
 
       show: false,
+
+      refreshInterval: 5000,
     };
   },
 
   computed: {
-    ...mapState({
-      // modal_list: state => state.modal.modal_list,
-      // CurrentRegions: state => state.CurrentRegions,
-      CurrentDiskMenu: (state) => state.CurrentDiskMenu,
-      CurrentDiskSubMenu: (state) => state.CurrentDiskSubMenu,
-      // HtmlFontSize: state => state.HtmlFontSize,
-      FooterBoxVisible: (state) => state.FooterBoxVisible,
-      // CurrentOverlayType: state => state.CurrentOverlayType
-    }),
+    ...mapState({}),
   },
 
-  methods: {},
+  methods: {
+    TimedRefresh() {
+      for (let i in this.$refs) {
+        const page = this.$refs[i];
 
-  created() {
-    // this.$modal({
-    //   title: "测试",
-    //   placement: "top-right",
-    //   component: () => import("@/pages/ModalPage_01.vue")
-    // });
-    // this.$modal({
-    //   title: "测试",
-    //   placement: "center",
-    //   component: () => import("@/pages/ModalPage_01.vue")
-    // });
-    // this.$modal({
-    //   placement: "center",
-    //   component: "PowerBoxLoop",
-    //   data: {
-    //     id: "1号配电箱"
-    //   }
-    // });
+        if (page && "function" === typeof page.refresh) {
+          page.refresh();
+        }
+      }
+
+      setTimeout(() => {
+        this.TimedRefresh();
+      }, this.refreshInterval);
+    },
   },
 
   mounted() {
     setTimeout(() => {
       this.show = true;
+
+      setTimeout(() => {
+        this.TimedRefresh();
+      }, this.refreshInterval);
     }, 100);
   },
 };
