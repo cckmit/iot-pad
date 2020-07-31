@@ -28,35 +28,43 @@
           <el-input type="textarea" rows="6" v-model="vm.prop4" clearable></el-input>
         </el-form-item>
 
-        <el-form-item label="上传图片：" prop="prop5">
+        <el-form-item label="上传图片：" prop="prop5" class="textarea-item">
           <el-upload
             action="https://jsonplaceholder.typicode.com/posts/"
             list-type="picture-card"
-            :on-preview="handlePictureCardPreview"
-            :on-remove="handleRemove"
+            :file-list="fileList"
           >
             <i class="el-icon-plus"></i>
+
+            <div slot="file" slot-scope="{file}">
+              <img class="el-upload-list__item-thumbnail" :src="file.url" alt />
+              <span class="el-upload-list__item-actions" style="opacity:1;">
+                <span style="display:inline-block">
+                  <i
+                    @click="handlePreview(file)"
+                    class="el-icon-zoom-in"
+                    style="color:rgba(255,255,255,.7)"
+                  ></i>
+                </span>
+                <span style="display:inline-block">
+                  <i
+                    class="el-icon-delete"
+                    @click="handleRemove(file)"
+                    style="color:rgba(255,255,255,.7)"
+                  ></i>
+                </span>
+              </span>
+            </div>
           </el-upload>
         </el-form-item>
+
       </el-form>
 
-      <!-- <div class="item" style="margin-top:.24rem">
-        <el-radio-group v-model="vm.prop1">
-          <el-radio :label="1">静音</el-radio>
-          <el-radio :label="2">取消静音</el-radio>
-          <el-radio :label="3">复位</el-radio>
-        </el-radio-group>
-      </div>
-      <div class="item">
-        <el-radio-group v-model="vm.prop2">
-          <el-radio :label="1">断路</el-radio>
-          <el-radio :label="2">通路</el-radio>
-        </el-radio-group>
-      </div>
       <div class="item" style="text-align:right;padding-top:.3rem">
         <a class="btn btn-primary" @click="onConfirm">确认</a>
         <a class="btn" @click="onCancel">取消</a>
-      </div>-->
+      </div>
+
     </ColumnItem>
   </div>
 </template>
@@ -69,6 +77,22 @@ export default {
         prop1: 1,
         prop2: 1,
       },
+
+      dialogVisible: false,
+      dialogImageUrl: "",
+
+      fileList: [
+        {
+          name: "food.jpeg",
+          url:
+            "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100",
+        },
+        {
+          name: "food2.jpeg",
+          url:
+            "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100",
+        },
+      ],
     };
   },
 
@@ -79,6 +103,24 @@ export default {
 
     onCancel() {
       this.$emit("cancel");
+    },
+
+    handlePreview(file) {
+      this.dialogImageUrl = file.url;
+      this.dialogVisible = true;
+
+      this.$modal({
+        placement: "center",
+        width: "4rem",
+        height: "4rem",
+        component: {
+          render: () => <img src={file.url} style="max-width:100%;" />,
+        },
+      });
+    },
+
+    handleRemove(file) {
+      this.fileList.splice(this.fileList.indexOf(file), 1);
     },
   },
 };

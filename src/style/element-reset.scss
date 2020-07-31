@@ -213,7 +213,7 @@
 .el-input {
     .el-input__suffix i {
         font-size: 0.14rem;
-        line-height: 0.28rem;
+        line-height: 0.24rem;
         margin-right: 0.05rem;
         width: 0.14rem;
         text-align: center;
@@ -223,12 +223,12 @@
         background: rgb(14, 19, 25);
         border-width: 0.01rem;
         border-color: rgb(60, 69, 76);
-        border-radius: 0.06rem;
-        padding: 0 0.15rem;
-        height: 0.28rem;
-        line-height: 0.28rem;
+        border-radius: 0.04rem;
+        padding: 0 0.06rem;
+        height: 0.24rem;
+        line-height: 0.24rem;
         color: rgba(166, 221, 255, 0.7);
-        font-size: 0.14rem;
+        font-size: 0.12rem;
         // font-weight: bold;
 
         &::-webkit-input-placeholder {
@@ -263,9 +263,9 @@
 
         .el-select__caret {
             font-size: 0.16rem;
-            width: 0.24rem;
+            width: 0.14rem;
             opacity: 0.8;
-            line-height: 0.28rem;
+            line-height: 0.24rem;
             vertical-align: middle;
             color: rgba(76, 164, 252, 0.7);
         }
@@ -342,15 +342,15 @@
 
             button {
                 font-size: 0.13rem;
-                height: 0.28rem;
-                line-height: 0.28rem;
+                height: 0.24rem;
+                line-height: 0.24rem;
             }
 
             .el-pager li {
                 font-size: 0.13rem;
                 padding: 0 0.04rem;
-                height: 0.28rem;
-                line-height: 0.28rem;
+                height: 0.24rem;
+                line-height: 0.24rem;
                 min-width: 0.3rem;
             }
 
@@ -434,4 +434,36 @@
     height: 0.4rem;
     line-height: 0.4rem;
     padding: 0 0.12rem 0 0;
+}
+
+.el-upload {
+    &.el-upload--picture-card {
+        background-color: rgb(14, 19, 25);
+        border: 0.01rem solid #3c454c;
+        border-radius: 0.06rem;
+        box-sizing: border-box;
+        width: 1rem;
+        height: 1rem;
+        line-height: 1rem;
+        vertical-align: top;
+
+        i {
+            font-size: 0.28rem;
+        }
+    }
+}
+
+.el-upload-list--picture-card {
+    .el-upload-list__item {
+        border: 0.01rem solid #3c454c;
+        border-radius: 0.06rem;
+        width: 1rem;
+        height: 1rem;
+        line-height: 1rem;
+        margin: 0 0.08rem 0.08rem 0;
+
+        &.is-success .el-upload-list__item-status-label {
+            display: none;
+        }
+    }
 }

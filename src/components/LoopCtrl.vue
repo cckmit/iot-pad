@@ -1,15 +1,12 @@
 <template>
-  <div class="loop">
+  <div class="loop-ctrl" @click="vState=vState=='on'?'off':'on'">
     <div class="loop-code">{{code}}</div>
     <div class="loop-bar-top"></div>
     <div class="loop-bar-bottom"></div>
-    <div class="loop-switch" :class="state"></div>
-    <div class="loop-states" :class="state">
+    <div class="loop-switch" :class="vState"></div>
+    <div class="loop-states" :class="vState">
       <SvgIcon icon-class="arrow-down" />
       <span class="point"></span>
-    </div>
-    <div class="loop-icons" v-if="!control">
-      <SvgIcon v-for="(i,index) in icons" :key="index" :icon-class="IconMap[i]" />
     </div>
   </div>
 </template>
@@ -19,11 +16,21 @@ export default {
   props: {
     code: {},
     state: {},
-    icons: {}
+    icons: {},
+  },
+
+  watch: {
+    state(val) {
+      this.vState = val;
+    },
+    vState(val) {
+      this.$emit("update:state", val);
+    },
   },
 
   data() {
     return {
+      vState: this.state,
       IconMap: {
         A: "a",
         B: "v",
@@ -36,11 +43,12 @@ export default {
 </script>
 
 <style lang="scss">
-.loop {
+.loop-ctrl {
   $width: 0.5rem;
-  $height: 2rem;
+  $height: 1rem;
   $barWidth: 0.04rem;
-  $gutter: 0.16rem;
+  $gutter: 0.24rem;
+  margin-right: 0.14rem;
 
   display: inline-flex;
   width: $width;
@@ -55,17 +63,6 @@ export default {
 
   &:hover {
     background: rgba(26, 146, 255, 0.1);
-  }
-
-  &:before,
-  &:after {
-    content: "";
-    position: absolute;
-    height: $barWidth;
-    width: $width;
-    background: rgb(1, 44, 86);
-    left: 0;
-    // z-index: -1;
   }
 
   &:before {
@@ -96,25 +93,25 @@ export default {
   }
   .loop-bar-top {
     margin-top: 0.08rem;
-    height: 0.4rem;
+    height: 0.8rem;
   }
   .loop-bar-bottom {
     margin-top: $gutter;
     height: 0.24rem;
   }
   .loop-switch {
-    width: $barWidth * 1.5;
-    height: $barWidth * 1.5;
+    width: $barWidth * 2;
+    height: $barWidth * 2;
     border-radius: 50%;
     background: rgb(123, 195, 255);
     position: absolute;
-    top: 0.68rem;
+    top: 0.54rem;
     z-index: 1;
 
     &:before {
       content: "";
-      width: $barWidth * 1.5;
-      height: $barWidth * 1.5;
+      width: $barWidth * 2;
+      height: $barWidth * 2;
       border-radius: 50%;
       background: rgb(123, 195, 255);
       position: absolute;
@@ -123,12 +120,12 @@ export default {
 
     &:after {
       content: "";
-      width: $barWidth * 0.8;
+      width: $barWidth;
       border-radius: $barWidth/2;
       background: rgb(123, 195, 255);
       position: absolute;
       top: 0.03rem;
-      left: $barWidth * (1/3);
+      left: 0.015rem;
       height: $gutter;
       transition: all 0.2s ease;
       transform-origin: top;

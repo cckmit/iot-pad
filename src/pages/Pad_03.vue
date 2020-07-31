@@ -173,7 +173,7 @@ export default {
         id: "Pad_03_1",
         placement: "center",
         width: "6rem",
-        height: "4.6rem",
+        height: "5.4rem",
         component: "Pad_03_2",
         actions: {
           cancel() {
