@@ -2,6 +2,10 @@
   <div class="page Pad_05">
     <ColumnItem title="设备统计">
       <div slot="header" class="toolbar">
+        <a class="list-btn" @click="openList">
+          <i class="iconfont icon-liebiao"></i>
+          设备列表
+        </a>
         <el-form :model="query" inline>
           <el-form-item prop="prop1">
             <el-radio-group v-model="query.prop1">
@@ -84,7 +88,7 @@
         </div>
       </div>
 
-      <div class="flex-container" style="height:50%">
+      <div class="flex-container" style="height:49%">
         <div class="flex-item" style="width:100%;">
           <div class="flex-item__header">各设备运行趋势图</div>
           <div class="flex-item__body">
@@ -100,6 +104,7 @@
 import Equipment_01 from "@/pages/Equipment_01.vue";
 import Equipment_02 from "@/pages/Equipment_02.vue";
 import Equipment_03 from "@/pages/Equipment_03.vue";
+
 import { colorMap } from "@/plugins/echarts";
 
 export default {
@@ -150,6 +155,25 @@ export default {
         this.loading = false;
       }, 500);
     },
+
+    openList() {
+      const _this = this;
+      this.$modal({
+        id: "Equipment_01_1",
+        placement: "center",
+        width: "8rem",
+        height: "6rem",
+        component: () => import("@/pages/Equipment_01_1.vue"),
+        actions: {
+          cancel() {
+            _this.$modal.close("Equipment_01_1");
+          },
+          confirm() {
+            _this.$modal.close("Equipment_01_1");
+          },
+        },
+      });
+    },
   },
 
   mounted() {
@@ -194,7 +218,7 @@ export default {
   display: flex;
   margin-top: 0.2rem;
   flex-direction: column;
-  width: 100%;
+  width: calc(100% - .5rem);
   height: calc(100% - 0.2rem);
   .bar-item {
     width: 100%;
@@ -202,7 +226,7 @@ export default {
     height: 25%;
     align-items: center;
     .bar-item__label {
-      width: 25%;
+      width: 30%;
       vertical-align: middle;
       text-align: right;
       font-size: 0.12rem;
@@ -218,19 +242,39 @@ export default {
 .Pad_05 .toolbar {
   position: absolute;
   top: 0;
+  left: 1rem;
   right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-  .el-radio{
-    margin-right: .15rem;
+  .el-radio {
+    margin-right: 0.15rem;
   }
 
   .el-radio__label {
     font-size: 0.12rem;
-    padding-left: .05rem;
+    padding-left: 0.05rem;
   }
 
   .el-radio__input {
     transform: scale(0.8);
+  }
+
+  .el-form {
+    display: inline-block;
+
+    .el-form-item {
+      margin-bottom: 0;
+    }
+  }
+
+  .list-btn {
+    margin-right: 0.2rem;
+    color: rgba(26, 146, 255);
+    i {
+      color: inherit;
+    }
   }
 }
 </style>

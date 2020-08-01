@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <ColumnItem title="当前预警机制" v-loading="loading">
-      <div class="flex-container">
+      <div class="container">
         <div class="ball" :style="getBallStyle(mode)">
           <div class="boll-title">{{modeMap[mode].name}}</div>
           <div class="boll-subtitle">{{modeMap[mode].time}}</div>
@@ -83,7 +83,7 @@ export default {
 
 <style lang="scss" scoped>
 .page {
-  padding: 0 0.1rem 0.1rem 0.2rem;
+  // padding: 0 0.1rem 0.1rem 0.2rem;
 }
 
 .flex-container {
@@ -99,6 +99,7 @@ export default {
   height: 1.3rem;
   border-radius: 50%;
   // background-color: #fff;
+  margin: .2rem auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -119,6 +120,7 @@ export default {
 }
 
 .msg {
+  text-align: center;
   color: rgb(146, 208, 255);
   font-size: 0.16rem;
   margin-top: 0.2rem;

@@ -1,25 +1,20 @@
 <template>
-  <div class="page">
-    <ColumnItem title="设备列表" superTitle smallTitle>
-      <el-select
-        class="fixed-selector"
-        v-model="query.Peidianxiang"
-        clearable
-        placeholder="请选择配电箱类型"
-      >
-        <el-option v-for="i in PeidianxiangSelections" v-bind="i" :key="i.value"></el-option>
-      </el-select>
+  <div class="page Equipment_01_1">
+    <ColumnItem title="设备列表">
+      <div slot="header" class="toolbar">
+        <el-radio-group v-model="query.prop1">
+          <el-radio :label="1">按配电箱</el-radio>
+          <el-radio :label="2">按网关</el-radio>
+        </el-radio-group>
+        <el-select style="width:1.4rem" v-model="query.Peidianxiang" clearable placeholder="请选择配电箱类型">
+          <el-option v-for="i in PeidianxiangSelections" v-bind="i" :key="i.value"></el-option>
+        </el-select>
+      </div>
 
-      <FxTable
-        ref="table"
-        :columns="columns"
-        :query.sync="query"
-        :options="options"
-        style="margin-top:.1rem"
-      >
+      <FxTable ref="table" :columns="columns" :query.sync="query" :options="options">
         <template #toolbar>
           <el-row style="width:100%;" align="middle">
-            <el-col :span="8">
+            <el-col :span="12">
               <el-form inline @submit.native.prevent>
                 <el-form-item>
                   <el-radio-group v-model="query.days" @change="refresh">
@@ -31,13 +26,13 @@
                 </el-form-item>
               </el-form>
             </el-col>
-            <el-col :span="16">
+            <el-col :span="12">
               <el-form inline style="text-align:right;" @submit.native.prevent>
-                <el-form-item>
+                <!-- <el-form-item>
                   <el-select v-model="query.Category" clearable placeholder="请选择设备类型">
                     <el-option v-for="i in CategorySelections" v-bind="i" :key="i.value"></el-option>
                   </el-select>
-                </el-form-item>
+                </el-form-item>-->
 
                 <el-form-item>
                   <el-input
@@ -48,7 +43,7 @@
                   ></el-input>
                 </el-form-item>
                 <el-form-item>
-                  <el-button type="primary" @click="refresh">搜索</el-button>
+                  <a class="btn btn-primary" @click="refresh" style="padding: 0.05rem 0.1rem;line-height:1">搜索</a>
                 </el-form-item>
               </el-form>
             </el-col>
@@ -65,19 +60,19 @@
  */
 import {
   getEquipmentCategorySelections,
-  getPDXCategorySelections
+  getPDXCategorySelections,
 } from "@/api";
 
 export default {
   props: {
-    Category: {}
+    Category: {},
   },
 
   watch: {
     Category(val) {
       this.query.Category = val;
       this.refresh();
-    }
+    },
   },
 
   data() {
@@ -86,7 +81,8 @@ export default {
         days: 30,
         key: "",
         Category: this.Category,
-        Peidianxiang: ""
+        Peidianxiang: "",
+        prop1: 1,
       },
 
       options: {
@@ -96,27 +92,26 @@ export default {
         outBorder: false,
         highlightCurrentRow: false,
         paginationProps: {
-          height: "0.5rem"
+          height: "0.5rem",
         },
-        toolbarProps: {
-          height: "0.5rem"
-        },
-        pagerLayout: "prev,pager,next"
+        // toolbarProps: {
+        //   height: "0.5rem",
+        // },
+        pagerLayout: "prev, pager, next",
       },
 
       CategorySelections: [],
-      PeidianxiangSelections: []
+      PeidianxiangSelections: [],
     };
   },
 
   computed: {
     columns() {
-      const _this = this;
       return [
         {
-          label: "在线状态",
+          label: "状态",
           align: "center",
-          minWidth: 80,
+          minWidth: 50,
           prop: "IsOnline",
           render: (h, context) => {
             return context.value ? (
@@ -124,60 +119,50 @@ export default {
             ) : (
               <span class="color-5">离线</span>
             );
-          }
+          },
+        },
+        {
+          label: "设备型号",
+          prop: "Type",
+          minWidth: 80,
+          align: "center",
+          showOverflowTooltip: false,
         },
         {
           label: "设备ID",
           prop: "Code",
           minWidth: 70,
           align: "center",
-          showOverflowTooltip: false
+          showOverflowTooltip: false,
+        },
+        {
+          label: "设备类型",
+          prop: "Category",
+          minWidth: 80,
+          align: "center",
+          showOverflowTooltip: false,
         },
 
         {
-          label: "所属单位",
-          prop: "BusinessName",
+          label: "设备地址",
+          prop: "Address",
           minWidth: 120,
           align: "center",
           resizable: true,
-          showOverflowTooltip: false
-        },
-        {
-          label: "联系人",
-          align: "center",
-          minWidth: 80,
-          prop: "Contact"
-        },
-        {
-          label: "联系电话",
-          align: "center",
-          minWidth: 130,
-          prop: "Tel"
-        },
-        {
-          label: "所属场所",
-          align: "center",
-          minWidth: 130,
           showOverflowTooltip: false,
-          prop: "PlaceName",
-          render(h, context) {
-            const { value, row } = context;
-            return (
-              <a
-                class="link"
-                on-click={() => {
-                  _this.viewPlaceDetail(row);
-                }}
-              >
-                {value}
-              </a>
-            );
-          }
+        },
+        {
+          label: "控制器地址",
+          prop: "CtrlAddress",
+          minWidth: 100,
+          align: "center",
+          resizable: true,
+          showOverflowTooltip: false,
         },
         {
           label: "报警数",
           align: "center",
-          minWidth: 80,
+          minWidth: 70,
           prop: "WarningCount",
           render: (h, context) => {
             const { row, value } = context;
@@ -187,12 +172,12 @@ export default {
                 <span>{value}</span>
               </span>
             );
-          }
+          },
         },
         {
           label: "故障数",
           align: "center",
-          minWidth: 100,
+          minWidth: 70,
           prop: "ErrorCount",
           render: (h, context) => {
             const { row, value } = context;
@@ -202,10 +187,10 @@ export default {
                 <span>{value}</span>
               </span>
             );
-          }
-        }
+          },
+        },
       ];
-    }
+    },
   },
 
   methods: {
@@ -217,35 +202,50 @@ export default {
 
     viewPlaceDetail(row) {
       alert(row.PlaceName + ":" + row.PlaceId);
-    }
+    },
   },
 
   created() {
-    getEquipmentCategorySelections().then(res => {
+    getEquipmentCategorySelections().then((res) => {
       if (res.bl) {
-        this.CategorySelections = res.data.rows.map(i => ({
+        this.CategorySelections = res.data.rows.map((i) => ({
           label: i.Name,
-          value: i.Id
+          value: i.Id,
         }));
       }
     });
 
-    getPDXCategorySelections().then(res => {
+    getPDXCategorySelections().then((res) => {
       if (res.bl) {
-        this.PeidianxiangSelections = res.data.rows.map(i => ({
+        this.PeidianxiangSelections = res.data.rows.map((i) => ({
           label: i.Name,
-          value: i.Id
+          value: i.Id,
         }));
       }
     });
-  }
+  },
 };
 </script>
 
-<style scoped lang="scss">
-.fixed-selector {
+<style lang="scss">
+.Equipment_01_1 .toolbar {
   position: absolute;
-  right: 0.1rem;
-  top: -0.3rem;
+  top: .1rem;
+  right: .1rem;
+  display: flex;
+  align-items: center;
+
+  .el-radio {
+    margin-right: 0.15rem;
+  }
+
+  .el-radio__label {
+    font-size: 0.12rem;
+    padding-left: 0.05rem;
+  }
+
+  .el-radio__input {
+    transform: scale(0.8);
+  }
 }
 </style>
