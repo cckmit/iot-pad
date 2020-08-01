@@ -11,7 +11,7 @@ export default {
   props: {
     loading: Boolean,
     data: Array,
-    settings: {}
+    settings: {},
   },
 
   data() {
@@ -20,33 +20,34 @@ export default {
 
       radarOption: {
         tooltip: {
-          appendToBody: true
+          appendToBody: true,
         },
         radar: {
           name: {
             textStyle: {
-              color: "rgb(166,221,255)"
-            }
+              color: "rgb(166,221,255)",
+              fontSize: this.$root.getPxNumberByRem("0.10rem"),
+            },
           },
           indicator: [],
 
           splitArea: {
             areaStyle: {
-              color: "transparent"
-            }
+              color: "transparent",
+            },
           },
 
           axisLine: {
             lineStyle: {
-              color: "rgb(57,75,95)"
-            }
+              color: "rgb(57,75,95)",
+            },
           },
           splitLine: {
             lineStyle: {
-              color: "rgb(57,75,95)"
-            }
+              color: "rgb(57,75,95)",
+            },
           },
-          radius: "60%"
+          radius: "60%",
         },
 
         series: [
@@ -54,7 +55,7 @@ export default {
             name: "设备在线率",
             type: "radar",
             itemStyle: {
-              color: "rgb(58,172,255)"
+              color: "rgb(58,172,255)",
             },
             areaStyle: {
               color: {
@@ -65,20 +66,20 @@ export default {
                 colorStops: [
                   {
                     offset: 0,
-                    color: "rgba(58,172,255,.4)" // 0% 处的颜色
+                    color: "rgba(58,172,255,.4)", // 0% 处的颜色
                   },
                   {
                     offset: 1,
-                    color: "rgba(58,172,255,0)" // 100% 处的颜色
-                  }
+                    color: "rgba(58,172,255,0)", // 100% 处的颜色
+                  },
                 ],
-                global: false // 缺省为 false
-              }
+                global: false, // 缺省为 false
+              },
             },
-            data: []
-          }
-        ]
-      }
+            data: [],
+          },
+        ],
+      },
     };
   },
 
@@ -87,23 +88,23 @@ export default {
       handler() {
         this.refresh();
       },
-      deep: true
+      deep: true,
     },
     settings: {
       handler() {
         this.refresh();
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
 
   methods: {
     refresh() {
       const { metrics, dimension, name } = this.settings;
 
-      this.radarOption.radar.indicator = this.data.map(i => {
+      this.radarOption.radar.indicator = this.data.map((i) => {
         return {
-          name: i[dimension]
+          name: i[dimension],
         };
       });
 
@@ -111,8 +112,8 @@ export default {
       this.radarOption.series[0].data = [
         {
           name,
-          value: this.data.map(i => i[metrics])
-        }
+          value: this.data.map((i) => i[metrics]),
+        },
       ];
 
       if (this.radar) {
@@ -123,7 +124,7 @@ export default {
 
     onWindowResize() {
       this.radar.resize();
-    }
+    },
   },
 
   mounted() {
@@ -135,7 +136,7 @@ export default {
 
   beforeDestroy() {
     window.removeEventListener("resize", this.onWindowResize);
-  }
+  },
 };
 </script>
 

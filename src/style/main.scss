@@ -16,7 +16,7 @@ $liner-bg: linear-gradient(to top, rgba(#122f69, 0.8) 0%, rgba(#0a0e1b, 0.8) 30%
     display: flex;
     height: 100%;
     position: relative;
-    padding: 0 .15rem;
+    padding: 0 0.15rem;
 }
 
 .btn {
@@ -39,7 +39,7 @@ $liner-bg: linear-gradient(to top, rgba(#122f69, 0.8) 0%, rgba(#0a0e1b, 0.8) 30%
     }
 
     &.btn-primary {
-        background-color: rgb(37,111,192);
+        background-color: rgb(37, 111, 192);
     }
 
     &.btn-info {
@@ -81,7 +81,6 @@ $liner-bg: linear-gradient(to top, rgba(#122f69, 0.8) 0%, rgba(#0a0e1b, 0.8) 30%
     left: 0;
     right: 0;
     bottom: 0;
-    // background: rgba(blueviolet, 0.3);
     padding: $panel-gutter;
     display: flex;
     flex-direction: column;
@@ -253,16 +252,8 @@ $liner-bg: linear-gradient(to top, rgba(#122f69, 0.8) 0%, rgba(#0a0e1b, 0.8) 30%
 
             .el-dialog__body {
                 padding: 0.1rem 0.24rem 0.24rem 0.24rem;
-                // transition: height ease 0.2s;
-                // height: calc(100vh - 7vh - 2.3rem);
                 overflow-y: auto;
             }
-        }
-    }
-
-    &.lg {
-        .el-dialog__wrapper .el-dialog .el-dialog__body {
-            height: calc(100vh - 7vh - 0.2rem);
         }
     }
 }
@@ -282,7 +273,6 @@ $liner-bg: linear-gradient(to top, rgba(#122f69, 0.8) 0%, rgba(#0a0e1b, 0.8) 30%
 
     .logo {
         line-height: $header-height;
-        flex: 1;
         .logo-icon {
             width: 2.4vh;
             display: inline-block;
@@ -340,7 +330,6 @@ $liner-bg: linear-gradient(to top, rgba(#122f69, 0.8) 0%, rgba(#0a0e1b, 0.8) 30%
     }
 
     .switch {
-        flex: 1;
         text-align: center;
     }
 
@@ -368,14 +357,13 @@ $liner-bg: linear-gradient(to top, rgba(#122f69, 0.8) 0%, rgba(#0a0e1b, 0.8) 30%
             }
 
             svg {
-                font-size: 0.24rem;
+                font-size: 0.2rem;
             }
 
             &.location {
-                font-weight: bold;
-                font-size: 0.17rem;
-                svg {
-                    font-size: 0.16rem;
+                .el-input__inner {
+                    color: rgb(76, 164, 252);
+                    font-weight: bold;
                 }
             }
         }

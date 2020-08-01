@@ -6,7 +6,7 @@
 
     <!-- 面板层 -->
     <Layer :index="2" class="panel-layer">
-      <div class="flex-container" style="height:45%">
+      <div class="flex-container" style="height:40vh">
         <Panel :flex="2.2">
           <Pad_01 ref="page_1" />
         </Panel>
@@ -17,7 +17,7 @@
           <Pad_03 ref="page_3" />
         </Panel>
       </div>
-      <div class="flex-container" style="height:55%;">
+      <div class="flex-container" style="height:calc(100% - 40vh - .15rem);">
         <Panel :flex="3.5">
           <Pad_04 ref="page_4" />
         </Panel>
@@ -70,6 +70,7 @@ export default {
   },
 
   methods: {
+    //刷新方法
     TimedRefresh() {
       for (let i in this.$refs) {
         const page = this.$refs[i];
@@ -78,7 +79,11 @@ export default {
           page.refresh();
         }
       }
+      this.autoRefresh();
+    },
 
+    //开启定时刷新
+    autoRefresh() {
       setTimeout(() => {
         this.TimedRefresh();
       }, this.refreshInterval);
@@ -86,13 +91,9 @@ export default {
   },
 
   mounted() {
-    setTimeout(() => {
-      this.show = true;
+    this.show = true;
 
-      setTimeout(() => {
-        this.TimedRefresh();
-      }, this.refreshInterval);
-    }, 100);
+    // this.autoRefresh();
   },
 };
 </script>

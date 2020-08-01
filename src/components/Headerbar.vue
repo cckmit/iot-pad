@@ -16,20 +16,11 @@
     </div>
 
     <div class="header-info">
-      <!-- <span class="header-info--item location">
-        <SvgIcon icon-class="map-place" />
-        &nbsp;{{TopName||'-'}}
+      <span class="header-info--item location">
+        <el-select v-model="vCurrentPlace" style="width:auto;max-width:1.5rem">
+          <el-option v-for="i in PlaceList" v-bind="i" :key="i.value"></el-option>
+        </el-select>
       </span>
-      <span class="header-info--item">
-        <RegionSelect
-          v-model="vCurrentRegions"
-          :data="RegionList"
-          flatData
-          nodeKey="Id"
-          multiple
-          :props="{ label:'Name',parent:'ParentId' }"
-        />
-      </span> -->
       <span class="header-info--item">{{CurrentTime | time('yyyy-MM-dd')}}</span>
       <span class="header-info--item">{{CurrentTime | time('hh:mm')}}</span>
       <span class="header-info--item">{{CurrentTime | week}}</span>
@@ -48,15 +39,9 @@
 </template>
 
 <script>
-// import RegionSelect from "./RegionSelect/index";
-import { getLocation, logout, getWeather } from "@/api";
-import { mapState } from "vuex";
+import { logout, getWeather } from "@/api";
 
 export default {
-  components: {
-    // RegionSelect
-  },
-
   filters: {
     weatherIcon(val) {
       return (
@@ -74,24 +59,21 @@ export default {
           雨夹雪: "yujiaxue",
           冰雹: "bingbao",
           大雪: "daxue",
-          中雨: "zhongyu"
+          中雨: "zhongyu",
         }[val] || ""
       );
-    }
+    },
   },
 
   computed: {
-    ...mapState({
-      CurrentOverlayType: state => state.CurrentOverlayType
-    }),
-    vCurrentRegions: {
+    vCurrentPlace: {
       get() {
-        return this.$store.state.CurrentRegions;
+        return this.$store.state.CurrentPlace;
       },
       set(val) {
-        this.$store.commit("set_CurrentRegions", val);
-      }
-    }
+        this.$store.commit("set_CurrentPlace", val);
+      },
+    },
   },
 
   data() {
@@ -99,12 +81,12 @@ export default {
       PlaceTypeList: [
         {
           label: "街道/镇",
-          value: "STREET"
+          value: "STREET",
         },
         {
           label: "场所",
-          value: "PLACE"
-        }
+          value: "PLACE",
+        },
       ],
 
       CurrentPlaceType: 1,
@@ -112,8 +94,8 @@ export default {
       //所属区域顶级名称
       TopName: "",
 
-      //行政区划下拉列表树(可以是扁平化数据)
-      RegionList: [],
+      //场所下拉选项
+      PlaceList: [],
 
       //当前时间信息
       CurrentTime: new Date(),
@@ -121,35 +103,29 @@ export default {
       //天气信息对象
       weather: {
         type: "",
-        temperature: ""
-      }
+        temperature: "",
+      },
     };
   },
 
   methods: {
     //获取位置信息
-    getLocationInfo() {
-      getLocation().then(res => {
-        if (res.isSuccess && res.bl) {
-          const {
-            RegionList,
-            TopName
-            // Name,
-            // LocationName,
-            // LocationCode,
-            // LocationLevel,
-            // ZoomLevel
-          } = res.data.rows;
-
-          this.RegionList = RegionList;
-          this.TopName = TopName;
-        }
-      });
+    getPlaceSelection() {
+      this.PlaceList = [
+        {
+          label: "大南卫生服务中心",
+          value: 1,
+        },
+        {
+          label: "大北卫生服务中心",
+          value: 2,
+        },
+      ];
     },
 
     //获取天气信息
     getWeather() {
-      getWeather().then(res => {
+      getWeather().then((res) => {
         if (res.bl) {
           const { info, temperature } = res.data.result.data.realtime.weather;
 
@@ -159,7 +135,7 @@ export default {
       });
     },
 
-    //自动刷新时间
+    //当前时间自动刷新间隔
     autoUpdateCurrentTime() {
       setInterval(() => {
         this.CurrentTime = new Date();
@@ -169,7 +145,7 @@ export default {
     //登出
     logout() {
       this.$confirm("是否确认登出？", { title: "提醒" }).then(() => {
-        logout().then(res => {
+        logout().then((res) => {
           if (res.isSuccess && res.bl) {
             setTimeout(() => {
               location.replace("/Manage/Login");
@@ -177,16 +153,16 @@ export default {
           }
         });
       });
-    }
+    },
   },
 
   created() {
-    this.getLocationInfo();
+    this.getPlaceSelection();
 
     this.getWeather();
 
     this.autoUpdateCurrentTime();
-  }
+  },
 };
 </script>
 

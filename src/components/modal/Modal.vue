@@ -1,5 +1,5 @@
 <template>
-  <div class="modals" :class="FooterBoxVisible?'':'lg'">
+  <div class="modals">
     <el-dialog
       :top="getTop(modal)"
       :custom-class="'modal--'+modal.placement"
@@ -71,8 +71,7 @@ export default {
 
   computed: {
     ...mapState({
-      modal_list: (state) => state.modal.modal_list,
-      FooterBoxVisible: (state) => state.FooterBoxVisible,
+      modal_list: (state) => state.modal.modal_list
     }),
   },
 

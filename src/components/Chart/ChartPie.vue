@@ -15,9 +15,8 @@ export default {
     onClick: Function,
     color: {},
     selectedMode: {
-      default: false
+      default: false,
     },
-    smallTitle: Boolean
   },
 
   data() {
@@ -29,35 +28,32 @@ export default {
           textAlign: "center",
           textStyle: {
             color: "#fff",
+            lineHeight: this.$root.getPxNumberByRem(".18rem"),
             rich: {
               a: {
                 fontWeight: "bold",
-                fontSize: this.$root.getPxNumberByRem(
-                  this.smallTitle ? "0.2rem" : "0.24rem"
-                )
+                fontSize: this.$root.getPxNumberByRem("0.24rem"),
               },
               b: {
                 textIndent: -10,
-                fontSize: this.$root.getPxNumberByRem("0.12rem")
-              }
-            }
+                fontSize: this.$root.getPxNumberByRem("0.12rem"),
+              },
+            },
           },
           subtextStyle: {
             color: "#fff",
             lineHeight: this.$root.getPxNumberByRem("0rem"),
-            fontSize: this.$root.getPxNumberByRem(
-              this.smallTitle ? "0.12rem" : "0.14rem"
-            )
-          }
+            fontSize: this.$root.getPxNumberByRem("0.11rem"),
+          },
         },
         legend: [],
         tooltip: {
           show: true,
           formatter: "{b}：{c} ({d}%)",
           textStyle: {
-            fontSize: this.$root.getPxNumberByRem("0.14rem")
+            fontSize: this.$root.getPxNumberByRem("0.14rem"),
           },
-          appendToBody: true
+          appendToBody: true,
         },
         series: [
           {
@@ -66,21 +62,21 @@ export default {
             selectedOffset: this.$root.getPxNumberByRem("0.1rem"),
             labelLine: {
               normal: {
-                show: false
-              }
+                show: false,
+              },
             },
             label: {
-              show: false
+              show: false,
             },
             itemStyle: {
               normal: {
-                opacity: 0.4
+                opacity: 0.4,
               },
               emphasis: {
-                opacity: 1
-              }
+                opacity: 1,
+              },
             },
-            data: []
+            data: [],
           },
           {
             type: "pie",
@@ -91,26 +87,26 @@ export default {
               normal: {
                 show: false,
                 textStyle: {
-                  color: "rgb(0,0,0,0)"
-                }
-              }
+                  color: "rgb(0,0,0,0)",
+                },
+              },
             },
             labelLine: {
               normal: {
-                show: false
-              }
+                show: false,
+              },
             },
-            data: []
-          }
-        ]
-      }
+            data: [],
+          },
+        ],
+      },
     };
   },
 
   computed: {
     FooterBoxVisible() {
       return this.$store.state.FooterBoxVisible;
-    }
+    },
   },
 
   watch: {
@@ -120,20 +116,20 @@ export default {
           this.pie.resize();
         }
       },
-      immediate: true
+      immediate: true,
     },
     data: {
       handler() {
         this.refresh();
       },
-      deep: true
+      deep: true,
     },
     settings: {
       handler() {
         this.refresh();
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
 
   methods: {
@@ -147,8 +143,8 @@ export default {
           value: i[metrics],
           meta: i.meta,
           itemStyle: {
-            color: i.color || colors[index]
-          }
+            color: i.color || colors[index],
+          },
         };
       });
 
@@ -224,13 +220,13 @@ export default {
           textStyle: {
             rich: {
               a: {
-                color: "#fff"
-              }
-            }
+                color: "#fff",
+              },
+            },
           },
           itemWidth: this.$root.getPxNumberByRem("0.18rem"),
           itemHeight: this.$root.getPxNumberByRem("0.1rem"),
-          itemGap: this.$root.getPxNumberByRem("0.16rem")
+          itemGap: this.$root.getPxNumberByRem("0.16rem"),
         },
         {
           data: [],
@@ -240,14 +236,14 @@ export default {
           textStyle: {
             rich: {
               a: {
-                color: "#fff"
-              }
-            }
+                color: "#fff",
+              },
+            },
           },
           itemWidth: this.$root.getPxNumberByRem("0.18rem"),
           itemHeight: this.$root.getPxNumberByRem("0.10rem"),
-          itemGap: this.$root.getPxNumberByRem("0.16rem")
-        }
+          itemGap: this.$root.getPxNumberByRem("0.16rem"),
+        },
       ];
 
       const { legendShow } = this.settings;
@@ -262,8 +258,8 @@ export default {
       const total = data.reduce((pre, cur) => {
         return pre + cur.value;
       }, 0);
-      const legendFormatter = function(name) {
-        let item = data.find(i => i.name === name);
+      const legendFormatter = function (name) {
+        let item = data.find((i) => i.name === name);
 
         let percentTxt = total
           ? (item.value / total).toFixed(2) + "%"
@@ -300,9 +296,9 @@ export default {
           textStyle: {
             rich: {
               a: {
-                color: "#fff"
-              }
-            }
+                color: "#fff",
+              },
+            },
           },
           // backgroundColor: "pink",
           itemWidth: this.$root.getPxNumberByRem("0.2rem"),
@@ -311,10 +307,10 @@ export default {
           pageIconColor: "rgba(255,255,255,.3)",
           pageIconInactiveColor: "rgba(255,255,255,.1)",
           pageTextStyle: {
-            color: "rgba(255,255,255,.3)"
+            color: "rgba(255,255,255,.3)",
           },
-          pageIconSize: this.$root.getPxNumberByRem("0.1rem")
-        }
+          pageIconSize: this.$root.getPxNumberByRem("0.1rem"),
+        },
       ];
 
       const { legendShow } = this.settings;
@@ -328,8 +324,8 @@ export default {
       const total = data.reduce((pre, cur) => {
         return pre + cur.value;
       }, 0);
-      const legendFormatter = function(name) {
-        let item = data.find(i => i.name === name);
+      const legendFormatter = function (name) {
+        let item = data.find((i) => i.name === name);
 
         let percentTxt = total
           ? (item.value / total).toFixed(2) + "%"
@@ -339,12 +335,12 @@ export default {
       };
 
       this.pieOption.legend[0].formatter = legendFormatter;
-      this.pieOption.legend[0].data = data.map(i => i.name);
+      this.pieOption.legend[0].data = data.map((i) => i.name);
     },
 
     onWindowResize() {
       this.pie.resize();
-    }
+    },
   },
 
   mounted() {
@@ -356,7 +352,7 @@ export default {
 
   beforeDestroy() {
     window.removeEventListener("resize", this.onWindowResize);
-  }
+  },
 };
 </script>
 

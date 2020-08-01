@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <ChartPie :data="data" :loading="loading" :settings="settings" :onClick="onPieClick" />
+    <ChartPie :data="data" :loading="loading" :settings="settings" />
   </div>
 </template>
 
@@ -32,12 +32,12 @@ export default {
         unit: "类",
         subtitle: "设备类型",
         titlePosition: {
-          left: "18.6%",
+          left: "45%",
           top: "35%"
         },
-        radius: ["53%", "70%"],
-        center: ["20%", "50%"],
-        legendShow: true,
+        radius: ["65%", "90%"],
+        center: ["50%", "50%"],
+        legendShow: false,
         titleShow: true,
         legendPreset: 2
       };
